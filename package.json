@@ -1,0 +1,13 @@
+{
+  "name": "wanterlust-api",
+  "version": "1.0.0",
+  "description": "Wanterlust API with Prettier formatting",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,rb,erb}'"
+  },
+  "devDependencies": {
+    "prettier": "2.8.8",
+    "@prettier/plugin-ruby": "3.0.0"
+  }
+}
