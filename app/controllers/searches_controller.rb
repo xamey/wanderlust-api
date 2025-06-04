@@ -1,6 +1,10 @@
 class SearchesController < ApplicationController
+  include ElectricSql
+
   def index
-    proxy_request
+    proxy_request_to_electric_sql("searches") do
+      "\"user_id\" = #{current_user.id}"
+    end
   end
 
   def create
@@ -37,8 +41,5 @@ class SearchesController < ApplicationController
 
   def event_store
     Rails.configuration.event_store
-  end
-
-  def proxy_request
   end
 end
