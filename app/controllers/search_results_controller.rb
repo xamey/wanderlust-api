@@ -1,33 +1,37 @@
-class SearchesController < ApplicationController
+class SearchResultsController < ApplicationController
   def index
     proxy_request
   end
 
-  def create
-    if params[:tags].is_a?(Array) && params[:city].is_a?(String)
+  def favorite
+    if params[:id].is_a?(String)
       event =
-        CreateSearch.new(
+        SetSearchResultAsFavorite.new(
           data: {
-            tags: params[:tags],
-            city: params[:city],
+            search_result_id: params[:id],
             user_id: current_user.id
           }
         )
       event_store.publish(event)
 
-      render json: { message: "Search created" }, status: :created
+      render json: { message: "Search set as favorite" }, status: :ok
     else
       render json: { error: "Invalid payload" }, status: :unprocessable_entity
     end
   end
 
-  def destroy
+  def unfavorite
     if params[:id].is_a?(String)
       event =
-        DestroySearch.new(data: { id: params[:id], user_id: current_user.id })
+        SetSearchResultAsUnfavorite.new(
+          data: {
+            search_result_id: params[:id],
+            user_id: current_user.id
+          }
+        )
       event_store.publish(event)
 
-      render json: { message: "Search destroyed" }, status: :ok
+      render json: { message: "Search set as unfavorite" }, status: :ok
     else
       render json: { error: "Invalid payload" }, status: :unprocessable_entity
     end

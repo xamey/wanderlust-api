@@ -1,6 +1,7 @@
 require "json"
 
 require "llm/api_client"
+require_relative "llm/search_results"
 
 module LLM
   class LLMCallError < StandardError
@@ -14,12 +15,9 @@ module LLM
       @client ||= LLM::ApiClient.new
     end
 
-    def get_behaviours(user_prompt)
-      LLM::Behaviours.new(client, user_prompt).call
-    end
-
-    def analyse_conversation(session_id)
-      LLM::ConversationAnalysis.new(client, session_id).call
+    def get_search_results(user_prompt)
+      # LLM::SearchResults.new(client, user_prompt).call
+      [{ title: "Test", description: "Test" }]
     end
   end
 end

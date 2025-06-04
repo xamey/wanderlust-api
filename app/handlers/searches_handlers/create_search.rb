@@ -1,4 +1,4 @@
-module SearchesHandler
+module SearchesHandlers
   class CreateSearch < AsyncHandler
     include HandlerCommon
 
@@ -11,9 +11,7 @@ module SearchesHandler
           status: :pending
         )
 
-      event_store.publish_event(
-        SearchCreated.new(data: { search_id: search.id })
-      )
+      event_store.publish(SearchCreated.new(data: { search_id: search.id }))
     end
 
     def should_run?

@@ -16,10 +16,15 @@ Rails.configuration.to_prepare do
   event_store.subscribe_to_all_events(RailsEventStore::LinkByCausationId.new)
 
   handlers = {
-    SearchesHandler::CreateSearch => %w[CreateSearch],
-    SearchesHandler::DestroySearch => %w[DestroySearch],
-    SearchesHandler::SetSearchAsFavorite => %w[SetSearchAsFavorite],
-    SearchesHandler::SetSearchAsNotFavorite => %w[SetSearchAsNotFavorite]
+    SearchesHandlers::CreateSearch => %w[CreateSearch],
+    SearchesHandlers::DestroySearch => %w[DestroySearch],
+    ExternalSearchHandlers::CallExternalSearch => %w[SearchCreated],
+    SearchResultsHandlers::SetSearchResultAsFavorite => %w[
+      SetSearchResultAsFavorite
+    ],
+    SearchResultsHandlers::SetSearchResultAsNotFavorite => %w[
+      SetSearchResultAsUnfavorite
+    ]
   }
 
   handlers.each do |handler, events|
