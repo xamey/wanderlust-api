@@ -52,7 +52,7 @@ group :development, :test do
 
   # Required for Prettier Ruby plugin
   gem "parser", "~> 3.3"
-  gem "unparser", "~> 0.6.8"
+  gem "unparser", "~> 0.8.0"
   gem "syntax_tree", "~> 6.2"
 end
 
