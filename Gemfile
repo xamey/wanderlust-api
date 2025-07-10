@@ -68,5 +68,5 @@ group :test do
 end
 
 gem "jwt", "~> 2.9.3"
-gem "rails_event_store", "~> 2.16.0"
-gem "rails_event_store", "~> 2.16.0"
+gem "rails_event_store", "~> 2.17.1"
+gem "rails_event_store", "~> 2.17.1"
